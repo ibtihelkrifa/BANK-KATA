@@ -9,38 +9,28 @@ public class Transaction {
 
 	public enum Type implements Serializable {
 		DEPOSIT, WITHDRAW;
-
-		@Override
-		public String toString() {
-			switch (this) {
-			case DEPOSIT:
-				return "DEPOSIT";
-			case WITHDRAW:
-				return "WITHDRAW";
-			default:
-				return "";
-			}
-		}
 	}
 
-	private final Console console;
 	private final Type type;
 	private final double amount;
 	private final LocalDate date;
 
-	public Transaction(Console console, Type type, double amount, LocalDate now) {
+	public Transaction(Type type, double amount, LocalDate now) {
 		this.amount = amount;
 		this.date = now;
 		this.type = type;
-		this.console = console;
 	}
 
 	public double balanceAfterTransaction(double balance) {
 		return balance + amount;
 	}
 
-	public void printTo(PrintStream printer, double currentBalance) {
-		console.printLine(this.type.toString() + " | " + String.valueOf(date) + " | " + String.valueOf(amount) + " | " + String.valueOf(currentBalance));
+	public void printTo(PrintStream printer, Console console) {
+		console.printLine(this.type.toString() + " | " + String.valueOf(date) + " | " + String.valueOf(amount) );
+	}
+	
+	public double getAmount() {
+		return amount;
 	}
 
 	@Override

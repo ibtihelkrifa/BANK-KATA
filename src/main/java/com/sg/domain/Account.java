@@ -8,31 +8,26 @@ import com.sg.domain.Transaction.Type;
 public class Account {
 
 	private Statement statement;
-	private Console console;
 	
-	private double balance = 0;
-
-	public Account(Statement statement, Console console) {
+	public Account(Statement statement) {
 		this.statement = statement;
-		this.console = console;
 	}
 
 	public void deposit(double amount, LocalDate now) {
-		Transaction transaction = new Transaction(console, Type.DEPOSIT, amount, now);
+		Transaction transaction = new Transaction(Type.DEPOSIT, amount, now);
 		recordTransaction(transaction);
 	}
 
 	public void withdraw(double amount, LocalDate now ) {
-		Transaction transaction = new Transaction(console, Type.WITHDRAW, -amount, now);
+		Transaction transaction = new Transaction(Type.WITHDRAW, -amount, now);
 		recordTransaction(transaction);
 	}
 
 	private void recordTransaction(Transaction transaction) {
-		this.balance = transaction.balanceAfterTransaction(balance);
-		this.statement.addStatementLine(transaction, this.balance);
+		this.statement.addStatementLine(transaction);
 	}
 
-	public void printStatement(PrintStream printer) {
+	public void printStatement(PrintStream printer, Console console) {
 		statement.printTo(printer, console);
 	}
 }

@@ -5,15 +5,17 @@ import java.io.PrintStream;
 public class StatementLine {
 	
 	private Transaction transaction;
-	private double currentBalance;
 	
-	public StatementLine(Transaction transaction, double currentBalance) {
+	public StatementLine(Transaction transaction) {
 		this.transaction = transaction;
-		this.currentBalance = currentBalance;
 	}
 	
-	public void printTo(PrintStream printer) {
-		this.transaction.printTo(printer, currentBalance);
+	public Transaction getTransaction() {
+		return transaction;
+	}
+	
+	public void printTo(PrintStream printer, Console console) {
+		this.transaction.printTo(printer, console);
 	}
 
 }
