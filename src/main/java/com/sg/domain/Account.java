@@ -1,7 +1,7 @@
 package com.sg.domain;
 
 import java.io.PrintStream;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.sg.domain.Transaction.Type;
 
@@ -13,12 +13,12 @@ public class Account {
 		this.statement = statement;
 	}
 
-	public void deposit(double amount, LocalDate now) {
+	public void deposit(double amount, LocalDateTime now) {
 		Transaction transaction = new Transaction(Type.DEPOSIT, amount, now);
 		recordTransaction(transaction);
 	}
 
-	public void withdraw(double amount, LocalDate now ) {
+	public void withdraw(double amount, LocalDateTime now ) {
 		Transaction transaction = new Transaction(Type.WITHDRAW, -amount, now);
 		recordTransaction(transaction);
 	}

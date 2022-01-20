@@ -5,8 +5,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.io.PrintStream;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,12 +39,12 @@ public class AccountPrinterTest {
 
 		    PrintStream printer = System.out;
 		  
-			account.deposit(2000, LocalDate.parse("19/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			account.deposit(2000, LocalDateTime.parse("2017-01-13T09:32:50.303"));
 
 		    account.printStatement(printer, mockedConsole);
 
 		    verify(mockedConsole).printLine("OPERATION | DATE | AMOUNT");
-		    verify(mockedConsole).printLine("DEPOSIT | 2022-01-19 | 2000.0");
+		    verify(mockedConsole).printLine("DEPOSIT | 2017-01-13T09:32:50.303 | 2000.0");
 		    verify(mockedConsole).printLine("BALANCE : 2000.0");
 
 	}
@@ -59,12 +58,12 @@ public class AccountPrinterTest {
 
 		    PrintStream printer = System.out;
 		  
-			account.withdraw(2000, LocalDate.parse("19/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			account.withdraw(2000, LocalDateTime.parse("2017-01-13T09:32:50.303"));
 
 		    account.printStatement(printer, mockedConsole);
 
 		    verify(mockedConsole).printLine("OPERATION | DATE | AMOUNT");
-		    verify(mockedConsole).printLine("WITHDRAW | 2022-01-19 | -2000.0");
+		    verify(mockedConsole).printLine("WITHDRAW | 2017-01-13T09:32:50.303 | -2000.0");
 		    verify(mockedConsole).printLine("BALANCE : -2000.0");
 
 	}
@@ -78,14 +77,14 @@ public class AccountPrinterTest {
 
 		    PrintStream printer = System.out;
 		  
-			account.withdraw(1000, LocalDate.parse("19/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-			account.deposit(2000, LocalDate.parse("19/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			account.deposit(2000, LocalDateTime.parse("2017-01-13T09:32:50.303"));
+			account.withdraw(1000, LocalDateTime.parse("2017-01-14T09:32:50.303"));
 
 		    account.printStatement(printer, mockedConsole);
 
 		    verify(mockedConsole, times(1)).printLine("OPERATION | DATE | AMOUNT");
-		    verify(mockedConsole, times(1)).printLine("WITHDRAW | 2022-01-19 | -1000.0");
-		    verify(mockedConsole, times(1)).printLine("DEPOSIT | 2022-01-19 | 2000.0");
+		    verify(mockedConsole).printLine("DEPOSIT | 2017-01-13T09:32:50.303 | 2000.0");
+		    verify(mockedConsole).printLine("WITHDRAW | 2017-01-14T09:32:50.303 | -1000.0");
 		    verify(mockedConsole).printLine("BALANCE : 1000.0");
 
 

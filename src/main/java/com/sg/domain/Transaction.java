@@ -2,7 +2,7 @@ package com.sg.domain;
 
 import java.io.PrintStream;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Transaction {
@@ -13,9 +13,9 @@ public class Transaction {
 
 	private final Type type;
 	private final double amount;
-	private final LocalDate date;
+	private final LocalDateTime date;
 
-	public Transaction(Type type, double amount, LocalDate now) {
+	public Transaction(Type type, double amount, LocalDateTime now) {
 		this.amount = amount;
 		this.date = now;
 		this.type = type;
